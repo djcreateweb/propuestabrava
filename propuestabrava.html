@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Web · Brava Coffee & Brunch</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:      #FAF7F2;
+  --cream-dark: #F2EBE0;
+  --espresso:   #1C1008;
+  --espresso-s: #3B2112;
+  --terra:      #C05A2A;
+  --terra-l:    #E5855A;
+  --gold:       #C8923A;
+  --gold-l:     #E8C07A;
+  --sage:       #7A9670;
+  --muted:      #9A8878;
+  --white:      #FFFDF9;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Jost', sans-serif;
+  --pad-x: clamp(1.2rem, 5vw, 4rem);
+  --pad-y: clamp(2.8rem, 7vw, 5rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--espresso);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(14px, 3.8vw, 16px);
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── COVER ─────────────────────────── */
+.cover {
+  min-height: 100svh;
+  background: var(--espresso-s);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.8rem, 6vw, 3.5rem) var(--pad-x);
+  position: relative;
+  overflow: hidden;
+  gap: 2rem;
+}
+.cover::before {
+  content:''; position:absolute; top:-100px; right:-100px;
+  width:clamp(220px,60vw,500px); height:clamp(220px,60vw,500px);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(196,98,45,.25) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cover::after {
+  content:''; position:absolute; bottom:-60px; left:-60px;
+  width:clamp(160px,45vw,380px); height:clamp(160px,45vw,380px);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(200,146,58,.18) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cover-top { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.5rem; }
+.cover-brand { font-family:var(--serif); font-size:clamp(.88rem,3vw,1.15rem); color:rgba(255,253,249,.5); letter-spacing:.05em; }
+.cover-label { font-size:clamp(.6rem,2vw,.7rem); font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-l); opacity:.8; text-align:right; line-height:1.8; }
+.cover-main { position:relative; z-index:1; }
+.cover-eyebrow {
+  font-size:clamp(.6rem,2vw,.72rem); font-weight:500; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--terra-l); margin-bottom:1rem; display:flex; align-items:center; gap:.8rem;
+}
+.cover-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--terra-l); flex-shrink:0; }
+.cover-title { font-family:var(--serif); font-size:clamp(3rem,16vw,7rem); font-weight:300; line-height:1.0; color:var(--white); margin-bottom:.15em; }
+.cover-title em { font-style:italic; color:var(--gold-l); display:block; }
+.cover-subtitle { font-family:var(--serif); font-size:clamp(1rem,4vw,1.6rem); font-weight:300; color:rgba(255,253,249,.5); margin-top:.4rem; }
+.cover-tagline { margin-top:1.8rem; font-size:clamp(.8rem,3vw,.88rem); color:rgba(255,253,249,.42); line-height:1.8; max-width:380px; }
+.cover-bottom { display:grid; grid-template-columns:1fr 1fr; gap:1rem; position:relative; z-index:1; }
+.cover-meta { font-size:clamp(.7rem,2.5vw,.78rem); color:rgba(255,253,249,.32); line-height:1.9; }
+.cover-meta strong { font-weight:500; color:rgba(255,253,249,.55); }
+.cover-meta-right { text-align:right; }
+.cover-deco {
+  font-family:var(--serif); font-size:clamp(5rem,25vw,12rem); font-weight:300; font-style:italic;
+  color:rgba(255,253,249,.04); line-height:1; user-select:none; pointer-events:none;
+  position:absolute; bottom:4rem; right:var(--pad-x);
+}
+
+/* ── PAGES ─────────────────────────── */
+.page { max-width:860px; margin:0 auto; padding:var(--pad-y) var(--pad-x); }
+.page + .page { border-top:1px solid rgba(30,16,8,.08); }
+
+/* ── TYPE ──────────────────────────── */
+.section-num { font-size:clamp(.6rem,2vw,.68rem); font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--terra); margin-bottom:.5rem; }
+.section-title { font-family:var(--serif); font-size:clamp(1.9rem,7vw,3rem); font-weight:400; line-height:1.12; color:var(--espresso); margin-bottom:1.2rem; }
+.section-title em { font-style:italic; color:var(--terra); }
+.section-intro { font-size:clamp(.88rem,3vw,1rem); color:var(--espresso-s); line-height:1.85; margin-bottom:2.2rem; }
+.divider { width:40px; height:1px; background:var(--terra); margin:1.8rem 0; }
+
+/* ── HIGHLIGHT ─────────────────────── */
+.highlight {
+  background:var(--espresso-s); color:var(--white);
+  padding:clamp(1.4rem,5vw,2.5rem) clamp(1.2rem,5vw,3rem);
+  border-radius:3px; margin:2rem 0; position:relative; overflow:hidden;
+}
+.highlight::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--gold); }
+.highlight-label { font-size:.65rem; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--gold-l); margin-bottom:.7rem; }
+.highlight p { font-size:clamp(.86rem,3vw,1.05rem); color:rgba(255,253,249,.88); line-height:1.8; }
+.highlight strong { color:var(--white); font-weight:500; }
+
+/* ── WHAT GRID ─────────────────────── */
+.what-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(30,16,8,.08); border:1px solid rgba(30,16,8,.08); margin:1.8rem 0; }
+.what-item { background:var(--cream); padding:clamp(1.1rem,4vw,2rem); position:relative; }
+.what-item::before {
+  content:attr(data-num); font-family:var(--serif); font-size:clamp(2rem,7vw,3.5rem); font-weight:300;
+  font-style:italic; color:rgba(192,90,42,.1); position:absolute; top:.8rem; right:1rem; line-height:1;
+}
+.what-item h4 { font-family:var(--serif); font-size:clamp(.95rem,3.5vw,1.2rem); font-weight:500; margin-bottom:.4rem; color:var(--espresso); padding-right:2rem; }
+.what-item p { font-size:clamp(.78rem,2.8vw,.88rem); color:var(--muted); line-height:1.65; }
+.what-full { grid-column:1/-1; border-top:2px solid var(--terra); background:linear-gradient(135deg,rgba(192,90,42,.04),transparent); }
+.tag { display:inline-block; background:var(--terra); color:#fff; font-size:.58rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; padding:.2rem .65rem; border-radius:20px; margin-left:.6rem; vertical-align:middle; white-space:nowrap; }
+
+/* ── QUOTE ─────────────────────────── */
+.quote-block { border-left:3px solid var(--gold); padding:1.2rem clamp(1rem,4vw,2rem); margin:2rem 0; background:var(--white); }
+.quote-block p { font-family:var(--serif); font-size:clamp(1.05rem,4vw,1.4rem); font-weight:300; font-style:italic; color:var(--espresso); line-height:1.5; margin-bottom:.6rem; }
+.quote-block cite { font-size:.75rem; color:var(--muted); font-style:normal; font-weight:500; }
+
+/* ── PLANS ─────────────────────────── */
+.plans-wrapper { display:flex; flex-direction:column; gap:1.2rem; margin:2rem 0; }
+.plan-card { border:1px solid rgba(30,16,8,.12); padding:clamp(1.3rem,5vw,2rem) clamp(1.1rem,4vw,1.8rem); border-radius:4px; position:relative; background:var(--white); }
+.plan-card.featured { border-color:var(--terra); border-width:2px; box-shadow:0 6px 28px rgba(192,90,42,.13); }
+.plan-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--terra); color:var(--white); font-size:.6rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; padding:.27rem 1rem; border-radius:20px; white-space:nowrap; }
+.plan-header { display:flex; justify-content:space-between; align-items:flex-start; gap:.5rem; margin-bottom:1.2rem; }
+.plan-name { font-family:var(--serif); font-size:clamp(1.15rem,4vw,1.4rem); font-weight:500; color:var(--espresso); }
+.plan-delivery { font-size:.72rem; color:var(--muted); margin-top:.1rem; }
+.plan-price { font-family:var(--serif); font-size:clamp(1.9rem,8vw,2.6rem); font-weight:300; color:var(--terra); line-height:1; text-align:right; }
+.plan-price sup { font-size:.85rem; font-weight:400; vertical-align:super; }
+.plan-features { list-style:none; display:flex; flex-direction:column; gap:.42rem; }
+.plan-features li { font-size:clamp(.78rem,2.8vw,.85rem); color:var(--espresso-s); display:flex; align-items:flex-start; gap:.5rem; line-height:1.45; }
+.plan-features li::before { content:'✓'; color:var(--sage); font-size:.75rem; font-weight:600; margin-top:.1rem; flex-shrink:0; }
+.plan-features.muted li::before { color:var(--muted); }
+.plan-note { font-size:.72rem; color:var(--muted); margin-top:1rem; font-style:italic; padding-top:.8rem; border-top:1px solid rgba(30,16,8,.07); }
+
+/* ── ADDONS ────────────────────────── */
+.addons { display:flex; flex-direction:column; gap:.8rem; margin:1.2rem 0; }
+.addon { display:flex; align-items:center; gap:.9rem; background:var(--cream-dark); padding:.9rem 1.1rem; border-radius:3px; }
+.addon-icon { font-size:1.3rem; flex-shrink:0; }
+.addon-text strong { display:block; font-size:clamp(.8rem,3vw,.88rem); font-weight:500; color:var(--espresso); }
+.addon-text span { font-size:clamp(.7rem,2.5vw,.78rem); color:var(--muted); }
+.addon-price { margin-left:auto; font-family:var(--serif); font-size:clamp(.98rem,3.5vw,1.1rem); font-weight:500; color:var(--terra); white-space:nowrap; flex-shrink:0; }
+
+/* ── PRICE TABLE ───────────────────── */
+.price-table { width:100%; border-collapse:collapse; margin:1.8rem 0; }
+.price-table tr { border-bottom:1px solid rgba(30,16,8,.07); }
+.price-table tr:last-child { border-bottom:none; border-top:2px solid var(--espresso-s); }
+.price-table td { padding:.8rem 0; font-size:clamp(.8rem,3vw,.92rem); vertical-align:top; }
+.price-table td:last-child { text-align:right; font-weight:500; font-family:var(--serif); font-size:clamp(.92rem,3.5vw,1.1rem); color:var(--espresso); white-space:nowrap; padding-left:.8rem; }
+.price-table .label { color:var(--muted); font-size:clamp(.72rem,2.5vw,.82rem); }
+.price-table .total td { padding-top:1rem; }
+.price-table .total td:last-child { font-size:clamp(1.3rem,5vw,1.6rem); color:var(--terra); }
+
+/* ── PAYMENT STEPS ─────────────────── */
+.payment-steps { display:flex; gap:0; margin:2rem 0; position:relative; }
+.payment-steps::before { content:''; position:absolute; top:22px; left:22px; right:22px; height:2px; background:rgba(30,16,8,.08); }
+.payment-step { flex:1; text-align:center; position:relative; z-index:1; }
+.step-circle { width:44px; height:44px; border-radius:50%; background:var(--cream-dark); border:2px solid rgba(30,16,8,.1); display:flex; align-items:center; justify-content:center; margin:0 auto .8rem; font-family:var(--serif); font-size:1.15rem; font-weight:500; color:var(--muted); }
+.step-circle.active { background:var(--terra); border-color:var(--terra); color:var(--white); }
+.step-label { font-size:clamp(.68rem,2.5vw,.78rem); font-weight:500; color:var(--espresso); margin-bottom:.15rem; }
+.step-desc { font-size:clamp(.62rem,2vw,.72rem); color:var(--muted); line-height:1.5; }
+
+/* ── COMPARISON ────────────────────── */
+.comparison { background:var(--white); border:1px solid rgba(30,16,8,.1); border-radius:3px; overflow:hidden; margin:1.8rem 0; }
+.comparison-header { background:var(--cream-dark); display:grid; grid-template-columns:1fr 52px 72px; padding:.7rem 1rem; font-size:clamp(.58rem,2vw,.7rem); font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); gap:.4rem; }
+.comparison-header span:not(:first-child) { text-align:center; }
+.comparison-row { display:grid; grid-template-columns:1fr 52px 72px; padding:.72rem 1rem; border-top:1px solid rgba(30,16,8,.06); font-size:clamp(.76rem,2.8vw,.88rem); align-items:center; gap:.4rem; }
+.comparison-row:nth-child(even) { background:rgba(250,247,242,.5); }
+.comparison-row span:first-child { line-height:1.4; }
+.check-col { text-align:center; }
+.check-yes { color:var(--sage); }
+.check-no  { color:rgba(30,16,8,.2); }
+.col-them  { color:var(--muted); font-size:.78rem; }
+.col-us    { color:var(--terra); font-weight:500; font-size:.78rem; }
+
+/* ── WHY GRID ──────────────────────── */
+.why-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.8rem 0; }
+.why-item { padding:clamp(1rem,4vw,1.8rem); border-left:2px solid var(--cream-dark); background:var(--white); }
+.why-item.accent { border-left-color:var(--terra); }
+.why-item h4 { font-family:var(--serif); font-size:clamp(.98rem,3.5vw,1.1rem); font-weight:500; margin-bottom:.4rem; color:var(--espresso); }
+.why-item p { font-size:clamp(.76rem,2.8vw,.85rem); color:var(--muted); line-height:1.65; }
+
+/* ── STEPS ─────────────────────────── */
+.steps-list { display:flex; flex-direction:column; gap:1rem; margin:1.8rem 0; }
+.step-item { display:flex; gap:1.1rem; align-items:flex-start; padding:clamp(1rem,4vw,1.5rem); background:var(--white); border-radius:3px; }
+.step-num { font-family:var(--serif); font-size:clamp(1.4rem,6vw,1.8rem); font-weight:300; font-style:italic; color:var(--terra); line-height:1; flex-shrink:0; min-width:1.6rem; }
+.step-item h4 { font-size:clamp(.82rem,3vw,.9rem); font-weight:600; color:var(--espresso); margin-bottom:.2rem; }
+.step-item p { font-size:clamp(.76rem,2.8vw,.83rem); color:var(--muted); line-height:1.6; }
+
+/* ── FOOTER ────────────────────────── */
+.doc-footer { background:var(--espresso); color:var(--white); padding:clamp(1.8rem,6vw,3rem) var(--pad-x); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1.5rem; }
+.footer-brand { font-family:var(--serif); font-size:clamp(1.15rem,4vw,1.4rem); }
+.footer-brand em { font-style:italic; color:var(--gold-l); }
+.footer-sub { font-size:.74rem; color:rgba(255,253,249,.38); margin-top:.2rem; }
+.footer-info { font-size:clamp(.72rem,2.5vw,.8rem); color:rgba(255,253,249,.42); line-height:1.9; text-align:right; }
+.footer-info a { color:var(--gold-l); text-decoration:none; }
+
+/* ── STICKY CTA (mobile) ───────────── */
+.sticky-cta { display:none; position:fixed; bottom:0; left:0; right:0; background:var(--terra); color:var(--white); text-align:center; padding:1rem 1.5rem; font-size:.88rem; font-weight:500; letter-spacing:.04em; z-index:100; box-shadow:0 -4px 20px rgba(192,90,42,.35); }
+.sticky-cta a { color:inherit; text-decoration:none; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+
+/* Mobile */
+@media (max-width: 599px) {
+  .cover-bottom { grid-template-columns:1fr; gap:.6rem; }
+  .cover-meta-right { text-align:left; }
+  .cover-deco { display:none; }
+
+  .what-grid { grid-template-columns:1fr; }
+  .why-grid  { grid-template-columns:1fr; }
+
+  .comparison-header,
+  .comparison-row { grid-template-columns:1fr 46px 60px; padding:.65rem .8rem; }
+  .col-us { font-size:.72rem; }
+
+  .footer-info { text-align:left; }
+
+  .sticky-cta { display:block; }
+  .doc-footer { padding-bottom:4.5rem; }
+}
+
+/* Tablet */
+@media (min-width: 600px) and (max-width: 860px) {
+  .plans-wrapper { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; align-items:start; }
+  .plan-card.featured { grid-column:1/-1; }
+  .addons { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+}
+
+/* Desktop */
+@media (min-width: 861px) {
+  .plans-wrapper { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; align-items:start; }
+  .addons { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-brand">DJ Create · Diseño Web</div>
+    <div class="cover-label">Propuesta comercial<br>Mayo 2025</div>
+  </div>
+  <div class="cover-main">
+    <div class="cover-eyebrow">Propuesta web para</div>
+    <h1 class="cover-title">Brava<br><em>Coffee</em></h1>
+    <p class="cover-subtitle">& Brunch · La Ñora, Murcia</p>
+    <p class="cover-tagline">Un sitio web hecho a la altura de tu local — cuidado en cada detalle, pensado para atraer nuevos clientes y reflejar la calidad de lo que ofreces.</p>
+    <div class="cover-deco">B</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <strong>Preparado por:</strong> DJ Create<br>
+      <strong>Web:</strong> djcreateweb.com<br>
+      <strong>Email:</strong> djcreateweb@gmail.com
+    </div>
+    <div class="cover-meta cover-meta-right">
+      <strong>Para:</strong> Brava Coffee & Brunch<br>
+      <strong>Dirección:</strong> C. Mayor 71, La Ñora<br>
+      <strong>Válida hasta:</strong> 30 días desde emisión
+    </div>
+  </div>
+</div>
+
+<!-- 01 -->
+<div class="page">
+  <div class="section-num">01 · El punto de partida</div>
+  <h2 class="section-title">Por qué Brava<br><em>necesita</em> una web</h2>
+  <p class="section-intro">Brava tiene algo que no todos los negocios consiguen: una identidad propia, un local cuidado y una propietaria que sabe exactamente lo que quiere transmitir. Lo único que falta es un escaparate digital a la altura de todo eso.</p>
+
+  <div class="highlight">
+    <div class="highlight-label">El problema real</div>
+    <p>Cuando alguien busca en Google <strong>"desayunos La Ñora"</strong> o <strong>"café brunch Murcia"</strong>, Brava aparece en la ficha — pero sin web. Muchos pasan de largo o van al primero que transmite confianza. <strong>Cada día sin web es un cliente que se va a otro sitio.</strong></p>
+  </div>
+
+  <div class="what-grid">
+    <div class="what-item" data-num="1">
+      <h4>Visibilidad en Google</h4>
+      <p>Una web posiciona a Brava en búsquedas locales. La ficha sola no basta para captar a quien no os conoce.</p>
+    </div>
+    <div class="what-item" data-num="2">
+      <h4>Carta y horarios accesibles</h4>
+      <p>El cliente consulta antes de salir de casa. Sin depender del Instagram ni de llamar por teléfono.</p>
+    </div>
+    <div class="what-item" data-num="3">
+      <h4>Primera impresión profesional</h4>
+      <p>Una web bien hecha transmite que el negocio es serio y está aquí para quedarse.</p>
+    </div>
+    <div class="what-item" data-num="4">
+      <h4>Diferenciación</h4>
+      <p>La mayoría de cafeterías de pueblo no tienen web. Tenerla bien hecha os pone en otra categoría.</p>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p>"El Instagram fideliza a quien ya te conoce. La web es para quien todavía no sabe que existes."</p>
+    <cite>— DJ Create</cite>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="page">
+  <div class="section-num">02 · El proyecto</div>
+  <h2 class="section-title">Qué se va a<br><em>construir</em></h2>
+  <p class="section-intro">Una web completa diseñada específicamente para Brava — no una plantilla genérica. Cada sección pensada para que el visitante encuentre lo que busca y se anime a venir.</p>
+
+  <div class="what-grid">
+    <div class="what-item" data-num="①">
+      <h4>Inicio con impacto</h4>
+      <p>Fotografía real del local, nombre y bienvenida. Lo primero que se ve tiene que enamorar.</p>
+    </div>
+    <div class="what-item" data-num="②">
+      <h4>La carta completa</h4>
+      <p>Desayunos, cafés, brunch y meriendas. Con descripción, precios y diseño que da hambre.</p>
+    </div>
+    <div class="what-item" data-num="③">
+      <h4>Galería de fotos</h4>
+      <p>Con las imágenes reales del Instagram. Que el cliente vea el ambiente antes de entrar.</p>
+    </div>
+    <div class="what-item" data-num="④">
+      <h4>Nuestra historia</h4>
+      <p>Quiénes sois, qué os mueve, por qué Brava. La parte humana que conecta con el cliente.</p>
+    </div>
+    <div class="what-item" data-num="⑤">
+      <h4>Horarios y mapa</h4>
+      <p>Google Maps integrado. El cliente sabe cómo llegar sin salir de la web.</p>
+    </div>
+    <div class="what-item" data-num="⑥">
+      <h4>Reseñas de Google</h4>
+      <p>Vuestras valoraciones visibles. La prueba social que convence al indeciso.</p>
+    </div>
+    <div class="what-item what-full" data-num="">
+      <h4>Web en español e inglés <span class="tag">Incluido</span></h4>
+      <p style="margin-top:.5rem">La Ñora recibe estudiantes Erasmus y visitantes internacionales cada año. La web tendrá un botón para cambiar de idioma al instante — toda la carta, los textos y la información disponibles en ambos idiomas. Un detalle que muy pocos negocios de la zona ofrecen.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <p style="font-size:.85rem; color:var(--muted); line-height:1.8">La web será <strong style="color:var(--espresso)">completamente responsiva</strong> — perfecta en móvil, tablet y ordenador. Incluye SEO local y enlace a <strong style="color:var(--espresso)">@hellobravaes</strong>.</p>
+</div>
+
+<!-- 03 -->
+<div class="page">
+  <div class="section-num">03 · La inversión</div>
+  <h2 class="section-title">Elige el plan<br>que mejor <em>encaja</em></h2>
+  <p class="section-intro">Tres opciones claras. Para un negocio como Brava, el Plan Avanzado cubre todo lo necesario con creces.</p>
+
+  <div class="plans-wrapper">
+    <div class="plan-card">
+      <div class="plan-header">
+        <div><div class="plan-name">Plan Básico</div><div class="plan-delivery">Entrega en 1 semana</div></div>
+        <div class="plan-price"><sup>€</sup>300</div>
+      </div>
+      <ul class="plan-features muted">
+        <li>Web de 5 páginas</li><li>Diseño responsivo</li><li>Formulario de contacto</li>
+        <li>SEO básico</li><li>Enlace a redes sociales</li><li>2 revisiones incluidas</li>
+      </ul>
+      <p class="plan-note">Válido para empezar, pero sin la personalización que merece Brava.</p>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-badge">⭐ Recomendado para Brava</div>
+      <div class="plan-header">
+        <div><div class="plan-name">Plan Avanzado</div><div class="plan-delivery">Entrega en 1,5 semanas</div></div>
+        <div class="plan-price"><sup>€</sup>400</div>
+      </div>
+      <ul class="plan-features">
+        <li>Web de 10 páginas</li><li>Diseño UI/UX personalizado</li><li>Animaciones y transiciones</li>
+        <li>Galería con fotos del Instagram</li><li>Carta completa con categorías</li>
+        <li>Web en español e inglés</li><li>Google My Business integrado</li>
+        <li>SEO local optimizado</li><li>2 revisiones incluidas</li>
+      </ul>
+      <p class="plan-note">El equilibrio perfecto entre calidad premium y precio razonable.</p>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-header">
+        <div><div class="plan-name">Plan 3D</div><div class="plan-delivery">Entrega en 2 semanas</div></div>
+        <div class="plan-price"><sup>€</sup>500</div>
+      </div>
+      <ul class="plan-features muted">
+        <li>Todo lo del Plan Avanzado</li><li>Animaciones 3D avanzadas</li>
+        <li>Efectos de partículas</li><li>Revisiones ilimitadas</li><li>Soporte post-entrega</li>
+      </ul>
+      <p class="plan-note">Para quien quiere el máximo impacto visual posible.</p>
+    </div>
+  </div>
+
+  <p style="font-size:.7rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:.8rem">Servicios adicionales</p>
+  <div class="addons">
+    <div class="addon">
+      <div class="addon-icon">🌐</div>
+      <div class="addon-text"><strong>Dominio propio</strong><span>bravacoffee.es o similar</span></div>
+      <div class="addon-price">10–20€<small style="font-size:.6rem; color:var(--muted)">/año</small></div>
+    </div>
+    <div class="addon">
+      <div class="addon-icon">☁️</div>
+      <div class="addon-text"><strong>Hosting gestionado</strong><span>Servidor a cargo de DJ Create</span></div>
+      <div class="addon-price">30€<small style="font-size:.6rem; color:var(--muted)">/mes</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 -->
+<div class="page">
+  <div class="section-num">04 · Resumen económico</div>
+  <h2 class="section-title">Lo que se paga<br>y <em>cuándo</em></h2>
+  <p class="section-intro">Sin sorpresas. La web se paga en dos partes — la mitad al empezar y la otra mitad al entregarlo.</p>
+
+  <table class="price-table">
+    <tr><td><strong>Plan Avanzado</strong><br><span class="label">Diseño y desarrollo web completo</span></td><td>400 €</td></tr>
+    <tr><td><strong>Dominio .es</strong><br><span class="label">Registro anual</span></td><td>~15 €/año</td></tr>
+    <tr><td><strong>Hosting mensual</strong><br><span class="label">Servidor + mantenimiento técnico</span></td><td>30 €/mes</td></tr>
+    <tr class="total"><td><strong>Inversión inicial total</strong><br><span class="label">Web + dominio + primer mes hosting</span></td><td><strong>~445 €</strong></td></tr>
+  </table>
+
+  <div class="payment-steps">
+    <div class="payment-step">
+      <div class="step-circle active">1</div>
+      <div class="step-label">Al firmar</div>
+      <div class="step-desc">50% · <strong>200€</strong></div>
+    </div>
+    <div class="payment-step">
+      <div class="step-circle">2</div>
+      <div class="step-label">Al entregar</div>
+      <div class="step-desc">50% · <strong>200€</strong></div>
+    </div>
+    <div class="payment-step">
+      <div class="step-circle">3</div>
+      <div class="step-label">Cada mes</div>
+      <div class="step-desc">Hosting<br><strong>30€/mes</strong></div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-label">Para verlo en perspectiva</div>
+    <p><strong>30€ al mes es el precio de un café al día.</strong> Si la web trae aunque sea 3 o 4 clientes nuevos al mes que no hubieran llegado de otra forma, ya está más que pagada. Y los efectos del SEO local se acumulan con el tiempo.</p>
+  </div>
+  <p style="font-size:.76rem; color:var(--muted); font-style:italic; margin-top:1rem">* Precios sin IVA. Métodos de pago: efectivo, Bizum o transferencia.</p>
+</div>
+
+<!-- 05 -->
+<div class="page">
+  <div class="section-num">05 · Por qué elegirnos</div>
+  <h2 class="section-title">No es una plantilla.<br>Es <em>vuestra</em> web.</h2>
+  <p class="section-intro">Hay muchas opciones para hacer una web. La diferencia está en el resultado final y en lo que hay detrás.</p>
+
+  <div class="comparison">
+    <div class="comparison-header">
+      <span>Qué se ofrece</span><span>Otros</span><span>DJ Create</span>
+    </div>
+    <div class="comparison-row"><span>Diseño personalizado para el negocio</span><span class="check-col check-no">✗</span><span class="check-col check-yes col-us">✓</span></div>
+    <div class="comparison-row"><span>Fotos reales del local integradas</span><span class="check-col check-no">✗</span><span class="check-col check-yes col-us">✓</span></div>
+    <div class="comparison-row"><span>Carta completa con categorías</span><span class="check-col col-them">A veces</span><span class="check-col check-yes col-us">✓</span></div>
+    <div class="comparison-row"><span>SEO local para Google</span><span class="check-col col-them">Básico</span><span class="check-col check-yes col-us">✓</span></div>
+    <div class="comparison-row"><span>Web en español e inglés</span><span class="check-col check-no">✗</span><span class="check-col check-yes col-us">✓</span></div>
+    <div class="comparison-row"><span>Trato directo y cercano</span><span class="check-col check-no">✗</span><span class="check-col check-yes col-us">✓</span></div>
+    <div class="comparison-row"><span>Entrega en menos de 2 semanas</span><span class="check-col check-no">✗</span><span class="check-col check-yes col-us">✓</span></div>
+    <div class="comparison-row"><span>Hosting y soporte técnico</span><span class="check-col col-them">Extra</span><span class="check-col check-yes col-us">✓ 30€/mes</span></div>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-item accent"><h4>Conocemos La Ñora</h4><p>No somos una agencia de Madrid. Somos locales. Sabemos a quién le habláis y cómo hablarle.</p></div>
+    <div class="why-item accent"><h4>Resultados rápidos</h4><p>Cuanto antes está la web, antes trabaja para vosotros. Entrega en 1,5 semanas.</p></div>
+    <div class="why-item"><h4>Precio sin sorpresas</h4><p>Lo que se presupuesta es lo que se paga. Sin letra pequeña, sin costes ocultos.</p></div>
+    <div class="why-item"><h4>La web es vuestra</h4><p>Al pagar el total, todos los archivos son vuestros. Total libertad en el futuro.</p></div>
+  </div>
+</div>
+
+<!-- 06 -->
+<div class="page">
+  <div class="section-num">06 · Arrancar</div>
+  <h2 class="section-title">Cómo lo<br><em>ponemos</em> en marcha</h2>
+  <p class="section-intro">Proceso sencillo. En menos de dos semanas Brava ya tiene su web funcionando.</p>
+
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num">1</div><div><h4>Firmar el contrato</h4><p>Se firma el documento y se abona la señal del 50% (200€). Desde ese momento, el proyecto empieza.</p></div></div>
+    <div class="step-item"><div class="step-num">2</div><div><h4>Facilitáis los materiales</h4><p>Logo, textos y fotos. En gran parte ya están disponibles en el Instagram de Brava.</p></div></div>
+    <div class="step-item"><div class="step-num">3</div><div><h4>DJ Create diseña y construye</h4><p>Trabajamos durante 1,5 semanas. A mitad del proceso enseñamos un avance para orientar el resultado.</p></div></div>
+    <div class="step-item"><div class="step-num">4</div><div><h4>Revisión y aprobación</h4><p>2 rondas de revisión incluidas. Ajustamos lo que haga falta hasta que estéis satisfechos.</p></div></div>
+    <div class="step-item"><div class="step-num">5</div><div><h4>Entrega y pago final</h4><p>Se abona el 50% restante (200€). Os damos los accesos y la web queda online.</p></div></div>
+  </div>
+
+  <div class="highlight" style="margin-top:2.5rem">
+    <div class="highlight-label">Para arrancar hoy</div>
+    <p>Esta propuesta tiene validez de <strong>30 días</strong>. Estamos disponibles por <strong>WhatsApp o email</strong> para cualquier duda. No hay compromiso hasta que se firma el contrato.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand">DJ <em>Create</em></div>
+    <div class="footer-sub">Diseño Web Profesional</div>
+  </div>
+  <div class="footer-info">
+    djcreateweb.com<br>
+    djcreateweb@gmail.com<br>
+    <a href="#">Propuesta para Brava Coffee & Brunch</a>
+  </div>
+</div>
+
+<div class="sticky-cta">
+  <a href="mailto:djcreateweb@gmail.com">✉️ &nbsp;Contactar para arrancar el proyecto</a>
+</div>
+
+</body>
+</html>
